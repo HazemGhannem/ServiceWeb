@@ -25,7 +25,57 @@ public class LogementService {
 			      .entity(r.getLogements()).type(MediaType.APPLICATION_JSON)
 			      .build();
 	}
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/logements")
+	public Response getathing(@QueryParam("reference") int reference,@QueryParam("deleguation") String deleguation,
+			@QueryParam("gouvernorat") String gouvernorat,
+			@QueryParam("type") Logement.Type type,
+			@QueryParam("prix") Float prix) {
+		if ((reference) != 0 ) {
+		r.getLogementsByReference(reference);
+		System.out.println("done reference");
+		return Response
+			      .status(Response.Status.OK)
+			      .entity(r.getLogementsByReference(reference)).type(MediaType.APPLICATION_JSON)
+			      .build();
+		}
 	
+	if ((deleguation) != null ) {
+		System.out.println("done deleguation");
+		r.getLogementsByDeleguation(deleguation);
+		return Response
+			      .status(Response.Status.OK)
+			      .entity(r.getLogementsByDeleguation(deleguation)).type(MediaType.APPLICATION_JSON)
+			      .build();
+		}
+	if ((gouvernorat) != null ) {
+		r.getLogementsByGouvernorat(gouvernorat);
+		return Response
+			      .status(Response.Status.OK)
+			      .entity(r.getLogementsByGouvernorat(gouvernorat)).type(MediaType.APPLICATION_JSON)
+			      .build();
+		}
+	if ((type) != null ) {
+		r.getLogementsByType(type);
+		return Response
+			      .status(Response.Status.OK)
+			      .entity(r.getLogementsByType(type)).type(MediaType.APPLICATION_JSON)
+			      .build();
+		}
+	if ((prix) != -1 ) {
+		System.out.println("prix");
+		r.getLogementsByPrix(prix);
+		return Response
+			      .status(Response.Status.OK)
+			      .entity(r.getLogementsByPrix(prix)).type(MediaType.APPLICATION_JSON)
+			      .build();
+		}
+	return Response
+		      .status(Response.Status.NOT_FOUND)	 
+		      .build();
+	}
+	/*
 	
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -62,7 +112,7 @@ public class LogementService {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/logmr")
-	public Response getLogementsByPrix(@QueryParam("type") Float prix) {
+	public Response getLogementsByPrix(@QueryParam("prix") Float prix) {
 		r.getLogementsByPrix(prix);
 		return Response
 			      .status(Response.Status.OK)
@@ -80,6 +130,8 @@ public class LogementService {
 			      .entity(r.getLogementsByReference(reference)).type(MediaType.APPLICATION_JSON)
 			      .build();
 		}
+	*/
+	
 	
 	
 	
